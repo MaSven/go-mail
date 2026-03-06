@@ -1885,6 +1885,10 @@ func (m *Msg) SetBodyWriter(
 	m.parts = []*Part{p}
 }
 
+func (m *Msg) SetParts(parts []*Part) {
+	m.parts = parts
+}
+
 // SetBodyHTMLTemplate sets the body of the message from a given html/template.Template pointer.
 //
 // This method sets the body of the message using the provided HTML template and data. The content type
