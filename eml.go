@@ -415,7 +415,7 @@ ReadNextPart:
 		if strings.EqualFold(contentType, TypeMultipartRelated.String()) {
 			goto ReadNextPart
 		}
-		part := msg.newPart(ContentType(contentType))
+		part := msg.NewPart(ContentType(contentType))
 		if charset, ok := optional["charset"]; ok {
 			part.SetCharset(Charset(charset))
 		}

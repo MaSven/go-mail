@@ -26,7 +26,7 @@ func TestPartEncoding(t *testing.T) {
 	for _, tt := range tests {
 		m := NewMsg()
 		t.Run(tt.name, func(t *testing.T) {
-			part := m.newPart(TypeTextPlain, WithPartEncoding(tt.enc), nil)
+			part := m.NewPart(TypeTextPlain, WithPartEncoding(tt.enc), nil)
 			if part == nil {
 				t.Errorf("newPart() WithPartEncoding() failed: no part returned")
 				return
@@ -59,7 +59,7 @@ func TestWithPartCharset(t *testing.T) {
 	for _, tt := range tests {
 		m := NewMsg()
 		t.Run(tt.name, func(t *testing.T) {
-			part := m.newPart(TypeTextPlain, WithPartCharset(tt.cs), nil)
+			part := m.NewPart(TypeTextPlain, WithPartCharset(tt.cs), nil)
 			if part == nil {
 				t.Errorf("newPart() WithPartCharset() failed: no part returned")
 				return
@@ -84,7 +84,7 @@ func TestPart_WithPartContentDescription(t *testing.T) {
 	for _, tt := range tests {
 		m := NewMsg()
 		t.Run(tt.name, func(t *testing.T) {
-			part := m.newPart(TypeTextPlain, WithPartContentDescription(tt.desc), nil)
+			part := m.NewPart(TypeTextPlain, WithPartContentDescription(tt.desc), nil)
 			if part == nil {
 				t.Errorf("newPart() WithPartContentDescription() failed: no part returned")
 				return
@@ -105,7 +105,7 @@ func TestPart_WithPartContentDescription(t *testing.T) {
 // TestPart_WithSMimeSinging tests the WithSMIMESigning method
 func TestPart_WithSMimeSinging(t *testing.T) {
 	m := NewMsg()
-	part := m.newPart(TypeTextPlain, WithSMIMESigning())
+	part := m.NewPart(TypeTextPlain, WithSMIMESigning())
 	if part == nil {
 		t.Errorf("newPart() WithSMIMESigning() failed: no part returned")
 		return
