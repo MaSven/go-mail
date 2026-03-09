@@ -25,6 +25,7 @@ type Part struct {
 	isDeleted   bool
 	writeFunc   func(io.Writer) (int64, error)
 	smime       bool
+	disposition string
 }
 
 // GetContent executes the WriteFunc of the Part and returns the content as a byte slice.
@@ -145,6 +146,14 @@ func (p *Part) SetEncoding(encoding Encoding) {
 //   - description: The new Content-Description to be set for the Part.
 func (p *Part) SetDescription(description string) {
 	p.description = description
+}
+
+// SetDisposition overrides the Content-Disposition of the Part.
+//
+// Parameters:
+//   - disposition: The new Content-Disposition to be set for the Part.
+func (p *Part) SetDisposition(disposition string) {
+	p.disposition = disposition
 }
 
 // SetIsSMIMESigned sets the flag for signing the Part with S/MIME.
