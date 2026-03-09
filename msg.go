@@ -1880,7 +1880,7 @@ func (m *Msg) SetBodyWriter(
 	contentType ContentType, writeFunc func(io.Writer) (int64, error),
 	opts ...PartOption,
 ) {
-	p := m.newPart(contentType, opts...)
+	p := m.NewPart(contentType, opts...)
 	p.writeFunc = writeFunc
 	m.parts = []*Part{p}
 }
@@ -1990,7 +1990,7 @@ func (m *Msg) AddAlternativeWriter(
 	contentType ContentType, writeFunc func(io.Writer) (int64, error),
 	opts ...PartOption,
 ) {
-	part := m.newPart(contentType, opts...)
+	part := m.NewPart(contentType, opts...)
 	part.writeFunc = writeFunc
 	m.parts = append(m.parts, part)
 }
@@ -2937,7 +2937,7 @@ func (m *Msg) hasPGPType() bool {
 	return m.pgptype > 0
 }
 
-// newPart returns a new Part for the Msg.
+// NewPart returns a new Part for the Msg.
 //
 // This method creates a new Part for the message with the specified content type,
 // using the message's current charset and encoding settings. Optional PartOption
@@ -2953,7 +2953,7 @@ func (m *Msg) hasPGPType() bool {
 // References:
 //   - https://datatracker.ietf.org/doc/html/rfc2045
 //   - https://datatracker.ietf.org/doc/html/rfc2046
-func (m *Msg) newPart(contentType ContentType, opts ...PartOption) *Part {
+func (m *Msg) NewPart(contentType ContentType, opts ...PartOption) *Part {
 	p := &Part{
 		contentType: contentType,
 		charset:     m.charset,
@@ -3301,7 +3301,7 @@ func (m *Msg) signMessage() error {
 	if err != nil {
 		return fmt.Errorf("failed to sign message: %w", err)
 	}
-	signaturePart := m.newPart(TypeSMIMESigned, WithPartEncoding(EncodingB64), WithSMIMESigning())
+	signaturePart := m.NewPart(TypeSMIMESigned, WithPartEncoding(EncodingB64), WithSMIMESigning())
 	signaturePart.SetContent(signedMessage)
 	m.parts = append(m.parts, signaturePart)
 
